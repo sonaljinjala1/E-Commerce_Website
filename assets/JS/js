@@ -1,0 +1,125 @@
+
+
+let product = [
+    {
+        id: 1,
+        name: "pizza",
+        price: 150,
+        qty: 1,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSErxfqqeo-EBMv8dQ_jtVzQ8im2HwtSavgAg&s",
+    },
+    {
+        id: 2,
+        name: "Roasted Vegetable Burger",
+        price: 100,
+        qty: 1,
+        image: "https://www.archanaskitchen.com//images/archanaskitchen/World_Sandwiches_Burgers_Wraps/Roasted_Vegetable_Burger_Recipe_with_Hummus-1.jpg",
+    },
+    {
+        id: 3,
+        name: "Veg Momos ",
+        price: 150,
+        qty: 1,
+        image: "https://www.cookclickndevour.com/wp-content/uploads/2016/11/whole-wheat-momos-recipe-2.jpg",
+    },
+    {
+        id: 4,
+        name: "Vegetable Sandwich",
+        price: 200,
+        qty: 1,
+        image: "https://www.foodandwine.com/thmb/gv06VNqj1uUJHGlw5e7IULwUmr8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2012-r-xl-vegetable-sandwich-with-dill-sauce-2000-0984c1b513ae4af396aee039afa5e38c.jpg",
+    },
+    {
+        id: 5,
+        name: "VADA PAV",
+        price: 100,
+        qty: 1,
+        image: "https://i.ytimg.com/vi/Z9Y60u8tI9M/maxresdefault.jpg",
+    },
+    {
+        id: 6,
+        name: "Veg Manchow Soup",
+        price: 120,
+        qty: 1,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUk1NSAhqLfmpul7DLjdKdDvW-PgYePqQMw&s",
+    },
+    {
+        id: 7,
+        name: "Vegetable Salad ",
+        price: 130,
+        qty: 1,
+        image: "https://static.toiimg.com/thumb/58892854.cms?imgsize=297936&width=800&height=800",
+    },
+    {
+        id: 8,
+        name: "Samosa Chaat",
+        price: 140,
+        qty: 1,
+        image: "https://www.cookwithmanali.com/wp-content/uploads/2019/09/Samosa-Chaat.jpg",
+    },
+];
+
+const getProduct = () => {
+    let tbl = "";
+    product.map((val, index) => {
+        tbl += `
+                <div class="seller">
+                <img src="assets/img/img-24.webp" alt="">
+                <span class="new">-10% </span>
+                <div class="seller-img">
+                <div class="product-item-action  ">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-solid fa-shuffle"></i>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+              </div>
+              <div class="seller-contant">
+                <p> Game Triger Finger New <br> Insulated PH-X</p>
+                <h1>$256.00</h1>
+                <div class="d-flex  justify-content-between">
+                  <div>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+        
+                  <div class="cart1">
+                    <i class="fa-solid fa-bag-shopping" class="cart1" style=" "></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+                    `
+    })        
+    document.getElementById('product').innerHTML = tbl;
+}
+getProduct();
+
+let cart = [];
+const addToCart = (pid) => {
+    let allcart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : []
+    let dup = allcart.find(val => val.id == pid);
+    if (dup) {
+        alert("Already Exists Your Cart");
+        return false;
+    }
+
+    product.map((val, i) => {
+        if (val.id == pid) {
+            if (localStorage.getItem('cart') === null || localStorage.getItem('cart') === undefined) {
+                cart.push(val);
+                localStorage.setItem('cart', JSON.stringify(cart))
+            }
+            else {
+                let oldproductdata = JSON.parse(localStorage.getItem('cart'));
+                oldproductdata.push(val);
+                localStorage.setItem('cart', JSON.stringify(oldproductdata))
+            }
+        }
+    })
+    alert("Product Successfully Add");
+}
+
